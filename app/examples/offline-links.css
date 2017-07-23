@@ -1,0 +1,14 @@
+.is-offline {
+  & a:not(.is-cached) {
+    opacity: .5;
+    cursor: not-allowed;
+    pointer-events: none;
+    text-decoration: none;
+    &::before {
+      content: '\26D4';
+      text-decoration: none;
+      font-family: Helvetica, Arial, sans-serif;
+      margin-right: .25em;
+    }
+  }
+}

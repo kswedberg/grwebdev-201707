@@ -1,0 +1,23 @@
+.Alert {
+  color: #070;
+  background-color: #efe;
+  border: 1px solid #070;
+  position: fixed;
+  right: 20px;
+  top: 20px;
+  padding: 10px;
+  z-index: 10;
+}
+.is-offline {
+  & .Alert {
+    color: #700;
+    background-color: #fee;
+    border: 1px solid #700;
+  }
+  & form {
+    position: relative;
+    opacity: .5;
+    cursor: not-allowed;
+    pointer-events: none;
+  }
+}

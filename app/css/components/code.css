@@ -1,0 +1,16 @@
+
+pre {
+  margin-bottom: .2em;
+  padding: 1em;
+  background-color: #fff;
+  font-size: 1.3em;
+}
+
+[data-prism]::after {
+  content: attr(data-prism);
+  display: block;
+  margin-bottom: 1em;
+  font-style: italic;
+  color: #777;
+  text-align: right;
+}

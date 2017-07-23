@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>GRWebDev: Offline</title>
+    <link rel="stylesheet" href="css/app.css">
+  </head>
+  <body>
+    <div id="slideshow">
+      <section class="is-active center">
+        <h1>Going Offline</h1>
+        <p>GrWebDev</p>
+        <p>24 July 2017</p>
+      </section>
+      <section>
+        <h2>Show Offline Status</h2>
+        <p>Add an "alert" div:</p>
+        <div data-prism="examples/is-offline.html"></div>
+
+        <p>And, add a function to change its state:</p>
+        <div data-prism="examples/is-offline-pre.js"></div>
+
+
+      </section>
+      <section>
+        <h2>Show Offline Status: Alert &amp; Forms</h2>
+        <div data-prism="examples/is-offline.js"></div>
+        <h3>Offline Form</h3>
+        <form class="" action="index.html" method="post">
+          <label for="form-foo">Foo</label>
+          <input type="text" name="foo" value="" id="form-foo">
+          <button type="submit" name="send">Send</button>
+        </form>
+        <div data-prism="examples/is-offline.css"></div>
+      </section>
+
+      <section>
+        <h2>Show Offline Status: Uncached Links</h2>
+        <p>
+          See <a href="https://mxb.at/blog/youre-offline/">https://mxb.at/blog/youre-offline/</a>
+        </p>
+        <!--
+        "The CacheStorage interface represents the storage for Cache objects. It provides a master directory of all the named caches that a ServiceWorker, other type of worker or window scope can access (you don't have to use it with service workers, even though that is the spec that defines it) and maintains a mapping of string names to corresponding Cache objects."
+        -->
+        <div data-prism="examples/offline-links.js"></div>
+        <div data-prism="examples/offline-links.css"></div>
+      </section>
+
+      <section>
+        <h2>Application Cache</h2>
+        <p>Yes, yes, we all know it's "<a href="https://alistapart.com/article/application-cache-is-a-douchebag">a douchebag</a>" and the W3C has deprecated it.</p>
+        <p>But if your browser doesn't support Service Workers (*cough* Safari *cough*), it's better than nothing.</p>
+        <ul>
+          <li>Good idea to generate it during build process with a library (search npm).</li>
+          <li>
+            <p>Make sure you don't cache the manifest itself.</p>
+            <code>ExpiresByType text/cache-manifest "access plus 0 seconds"</code></li>
+        </ul>
+      </section>
+
+      <section>
+        <h2>PWAs: Progressive Web Apps</h2>
+        <ul>
+          <li>Need Service Worker (Performance improvement, offline capability)</li>
+          <li>Need manifest.json (Android homescreen availability, etc.)</li>
+          <li>Need https (Security)</li>
+          <li>Don't need to be apps</li>
+        </ul>
+        <p>See <a href="https://developers.google.com/web/progressive-web-apps/checklist">Google Web App Checklist</a></p>
+      </section>
+
+      <section>
+        <h2>PWAs: Service Workers</h2>
+        <p>Intercept network requests to do different things based on network connection, cached status of assets, your preferences.</p>
+
+        <p>Some possibilities:</p>
+        <ul>
+          <li>Show a custom offline page if the network is down</li>
+          <li>Get resources from the network first, and fall back to a cached version if network is down</li>
+          <li>Get resources from cache first, and fall back to network if cached copy unavailable or stale</li>
+          <li>Provide push notifications</li>
+          <li>Enable background sync</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2>PWAs: Registering SW — Minimal</h2>
+        <div data-prism="examples/sw-register-minimal.js"></div>
+      </section>
+
+      <section>
+        <h2>PWAs: Registering SW — Robust</h2>
+        <div data-prism="examples/sw-register-full.js"></div>
+      </section>
+
+      <section>
+        <h2>PWAs: SW Offline Page Fallback</h2>
+        <p>Regarding waitUntil():</p>
+        <blockquote cite="https://developer.mozilla.org/en-US/docs/Web/API/ExtendableEvent/waitUntil">In service workers, extending the life of an event prevents the browser from terminating the service worker before asynchronous operations within the event have completed.</blockquote>
+        <div data-prism="examples/sw-fallback/sw-pre.js"></div>
+      </section>
+      <section>
+        <h2>PWAs: SW Offline page fallback</h2>
+
+        <div data-prism="examples/sw-fallback/sw.js"></div>
+
+        <p><a href="examples/sw-fallback/">example</a></p>
+      </section>
+
+      <section>
+        <h2>PWAs: SW Caching</h2>
+
+
+      </section>
+      <section>
+        <h2>PWAs: SW Background Sync</h2>
+
+        <p>See <a href="https://developers.google.com/web/updates/2015/12/background-sync">Introducing Background Sync</a></p>
+      </section>
+
+      <section>
+        <h2>PWAs: Resources</h2>
+
+        <ul>
+          <li><a href="https://workboxjs.org/">Workbox</a>: A set of modular JavaScript libraries</li>
+          <li><a href="https://developers.google.com/web/tools/lighthouse/">Lighthouse</a>: Chrome extension/CLI tool/Node module for running web page audits (including PWA checks). Also, available in Chrome Canary's Developer Tools Audit tab. </li>
+        </ul>
+      </section>
+      <section>
+        <h2>Databases</h2>
+      </section>
+
+      <section>
+        <h2>Databases: PouchDB / CouchDB</h2>
+      </section>
+
+      <section>
+        <h2>Databases: GUN</h2>
+        <blockquote cite="http://gun.js.org/">
+          GUN works even if your internet or cell reception doesn't. Users can still plug away and save data as normal, and then when the network comes back online GUN will automatically synchronize all the changes and handle any conflicts for you.
+        </blockquote>
+      </section>
+
+      <section>
+        <h2>Offline-first Framework: Hoodie</h2>
+        <ul>
+          <li>Uses PouchDB / CouchDB</li>
+
+        </ul>
+      </section>
+      <section>
+        <h2>Resources</h2>
+        <ul>
+          <li><a href="https://developers.google.com/web/fundamentals/instant-and-offline/offline-cookbook/">Offline Cookbook</a></li>
+          <li>Offline-first for Your Templated Site (<a href="https://jeffy.info/2016/11/02/offline-first-for-your-templated-site-part-1.html">Part 1</a>, <a href="https://jeffy.info/2017/01/24/offline-first-for-your-templated-site-part-2.html">Part 2</a></li>)
+        </ul>
+      </section>
+      <section>
+        <h2>My Examples</h2>
+        <ul>
+          <li><a href="https://experiment21.com/">Experiment 21</a></li>
+          <li><a href="https://derfinkletv.fusionarydev.com/game/PWBD">DTV</a> (NOT READY FOR PRIME TIME!)</li>
+        </ul>
+      </section>
+    </div>
+    <div
+      class="Alert"
+      id="alert"
+      aria-live="assertive"
+      aria-relevant="text"
+      hidden
+    ></div>
+    <script src="js/app.js"></script>
+  </body>
+</html>
