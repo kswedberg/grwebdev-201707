@@ -1,19 +1,20 @@
-const cacheLabel = 'grwebdev-offline';
+const cacheId = 'grwebdev-offline';
+const precacheFiles = [
+  'offline.html',
+  '404.html',
+  '/css/app.css',
+  '/js/app.js',
+  'sw-register.js'
+];
 
-const preLoad = () => {
-  return caches.open(cacheLabel)
+const precache = () => {
+  return caches.open(cacheId)
   .then((cache) => {
-    return cache.addAll([
-      'offline.html',
-      'index.html',
-      '/css/app.css',
-      '/js/app.js',
-      'sw-register.js'
-    ]);
+    return cache.addAll(precacheFiles);
   });
 };
 
-const checkResponse = (request) => {
+const getFromServer = (request) => {
   return new Promise((resolve, reject) => {
     fetch(request)
     .then((response) => {
@@ -26,45 +27,53 @@ const checkResponse = (request) => {
   });
 };
 
+const getFallbackFile = (matching) => {
+  if (!matching || matching.status === 404) {
+    return !matching ? 'offline.html' : '404.html';
+  }
+
+  return null;
+};
+
+const getFromCache = (request) => {
+  return caches.open(cacheId)
+  .then((cache) => {
+    return cache.match(request)
+    .then((matching) => {
+      let fallback = getFallbackFile(matching);
+
+      if (fallback) {
+        return cache.match(fallback);
+      }
+
+      return matching;
+    });
+  });
+};
+
 const addToCache = (request) => {
-  return caches.open(cacheLabel)
+  return caches.open(cacheId)
   .then((cache) => {
     return fetch(request)
     .then((response) => {
       if (!response.url) {
         return;
       }
-      console.log(`Add page to cache: ${response.url}`);
 
       return cache.put(request, response);
     });
   });
 };
 
-const returnFromCache = (request) => {
-  return caches.open(cacheLabel)
-  .then((cache) => {
-    return cache.match(request)
-    .then((matching) => {
-      if (!matching || matching.status === 404) {
-        return cache.match('offline.html');
-      } else {
-        return matching;
-      }
-    });
-  });
-};
-
-// Set up the offline page in the cache and open a new cache
 self.addEventListener('install', (event) => {
-  event.waitUntil(preLoad());
+  event.waitUntil(precache());
 });
 
 self.addEventListener('fetch', (event) => {
   event.respondWith(
-    checkResponse(event.request)
+    getFromServer(event.request)
     .catch(() => {
-      return returnFromCache(event.request);
+      return getFromCache(event.request);
     })
   );
 

@@ -36,11 +36,19 @@ export let router = function(selector) {
     },
   };
 
+  let docTitle = document.title;
   let onHashChange = () => {
     removeActiveClass();
+
     let links = document.querySelectorAll('footer a');
 
     [...links].forEach((link) => link.classList.toggle('is-active', link.hash === location.hash));
+
+    let activeLink = document.querySelector('footer a.is-active');
+
+    if (activeLink) {
+      document.title = `${docTitle} ${activeLink.title}`;
+    }
   };
 
 

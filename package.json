@@ -41,6 +41,7 @@
     "rsyncwrapper": "^2.0.1",
     "sanitize.css": "^5.0.0",
     "webpack": "^3.3.0",
+    "workbox-build": "^1.1.0",
     "yargs": "^8.0.2"
   }
 }

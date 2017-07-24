@@ -7,10 +7,10 @@ let registerWorker = (filePath) => {
     typeof Cache === 'undefined' || !Cache.prototype.addAll ||
     !(httpsOnly || host === '127.0.0.1' || host === 'localhost')
   ) {
-    return;
+    return console.log('[Register]', 'Your browser does not support serviceWorker at this domain');
   }
 
-  navigator.serviceWorker.register(filePath, {scope: './'})
+  navigator.serviceWorker.register(filePath)
   .then(function(registration) {
 
     // updatefound is fired if sw.js changes.
@@ -21,22 +21,24 @@ let registerWorker = (filePath) => {
       installingWorker.onstatechange = function() {
         let state = installingWorker.state;
 
+        console.log('[Register]', 'onstatechange triggered', state);
+
         if (state === 'installed') {
 
           if (navigator.serviceWorker.controller) {
             // At this point, the old content has been purged and the fresh content has been added to the cache.
-            // Maybe display a "New content is available; please refresh" message?
-            console.log('New or updated content is available.');
+            // You might wnat to display a "New content is available; please refresh."
+            console.log('[Register]', 'New or updated content is available.');
           } else {
             // At this point, everything has been precached, but the service worker is not
             // controlling the page. The service worker will not take control until the next
             // reload or navigation to a page under the registered scope.
-            // Maybe display a "Content is cached for offline use" message?
-            console.log('Content is cached, and will be available for offline use the next time the page is loaded.');
+            // It's the perfect time to display a "Content is cached for offline use." message.
+            console.log('[Register]', 'Content is cached, and will be available for offline use the next time the page is loaded.');
           }
 
         } else if (state === 'redundant') {
-          console.error('The installing service worker became redundant.');
+          console.error('[Register]', 'The installing service worker became redundant.');
         }
       };
     };
@@ -48,8 +50,8 @@ let registerWorker = (filePath) => {
 
   })
   .catch(function(e) {
-    console.error('Error during service worker registration:', e);
+    console.error('[Register]', 'Error during service worker registration:', e);
   });
 };
 
-registerWorker('./sw.js');
+registerWorker('sw.js');

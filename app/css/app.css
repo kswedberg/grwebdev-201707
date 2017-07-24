@@ -41,6 +41,9 @@ section {
 h2 {
   margin-top: 0;
 }
+a {
+  color: #952a2a;
+}
 .center {
   text-align: center;
 }

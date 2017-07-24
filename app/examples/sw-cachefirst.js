@@ -1,19 +1,21 @@
-// This is the service worker with the Cache-first network
-
-const cacheLabel = 'grwebdev-offline';
+const cacheId = 'grwebdev-offline';
 const precacheFiles = [
-  /* Add an array of files to precache for your app */
+  'offline.html',
+  '404.html',
+  '/css/app.css',
+  '/js/app.js',
+  'sw-register.js'
 ];
 
 const precache = () => {
-  return caches.open(cacheLabel)
+  return caches.open(cacheId)
   .then(function(cache) {
     return cache.addAll(precacheFiles);
   });
 };
 
 const getFromCache = (request) => {
-  return caches.open(cacheLabel)
+  return caches.open(cacheId)
   .then((cache) => {
     return cache.match(request)
     .then((matches) => {
@@ -23,14 +25,15 @@ const getFromCache = (request) => {
 };
 
 const getFromServer = (request) => {
-  return fetch(request).then(function(response) {
+  return fetch(request)
+  .then(function(response) {
     return response;
   });
 };
 
 // Get newest version of file for next time
 const update = (request) => {
-  return caches.open(cacheLabel)
+  return caches.open(cacheId)
   .then(function(cache) {
     return fetch(request)
     .then(function(response) {
@@ -43,13 +46,25 @@ const update = (request) => {
 self.addEventListener('install', function(event) {
   event.waitUntil(precache()
   .then(function() {
-    console.log('Skip waiting on install');
-
+    // Forces trigger of 'activate' without waiting for browser refresh
     return self.skipWaiting();
   }));
 });
 
 self.addEventListener('activate', (event) => {
+
+  self.clients.matchAll({
+    includeUncontrolled: true
+  }).then(function(clientList) {
+    var urls = clientList.map(function(client) {
+      return client.url;
+    });
+
+    console.log('[ServiceWorker] Matching clients:', urls.join(', '));
+  });
+
+  // Along with self.skipWaiting() in the install listener,
+  // lets the serviceWorker start working immediately without navigation in the browser
   return self.clients.claim();
 });
 
@@ -59,5 +74,9 @@ self.addEventListener('fetch', (event) => {
     .catch(getFromServer(event.request))
   );
 
-  event.waitUntil(update(event.request));
+  // Only do this for same-site resources
+  if (location.origin === event.request.url.origin) {
+    event.waitUntil(update(event.request));
+  }
+
 });

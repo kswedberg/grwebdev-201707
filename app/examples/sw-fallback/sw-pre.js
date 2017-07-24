@@ -1,23 +1,32 @@
-const cacheLabel = 'grwebdev-offline';
+const cacheId = 'grwebdev-offline';
+const precacheFiles = [
+  // Fallback pages:
+  'offline.html',
+  '404.html',
 
-const preLoad = () => {};
+  // Important assets:
+  '/css/app.css',
+  '/js/app.js',
+  'sw-register.js'
+];
 
-const checkResponse = (request) => {};
-
+const precache = () => {};
+const getFromServer = (request) => {};
+const getFallbackFile = (matching) => {};
+const getFromCache = (request) => {};
 const addToCache = (request) => {};
 
-const returnFromCache = (request) => {};
-
-// Set up the offline page in the cache and open a new cache
+// Set up the offline/404 pages (& primary assets) in the cache and open a new cache
 self.addEventListener('install', (event) => {
-  event.waitUntil(preLoad());
+  event.waitUntil(precache());
 });
 
 self.addEventListener('fetch', (event) => {
+  // Network first: try getFromServer(), and if it fails getFromCache()
   event.respondWith(
-    checkResponse(event.request)
+    getFromServer(event.request)
     .catch(() => {
-      return returnFromCache(event.request);
+      return getFromCache(event.request);
     })
   );
 

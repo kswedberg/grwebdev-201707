@@ -5,6 +5,8 @@ const cwd = process.cwd();
 const cheerio = require('cheerio');
 const Prism = require('prismjs');
 const toCopy = [
+  '.htaccess',
+  'favicon.ico',
   'manifest.json',
   'examples'
 ];
