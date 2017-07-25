@@ -10,16 +10,16 @@
     <div id="slideshow">
       <section class="is-active">
         <div class="center">
-
+          <h1>Going Offline</h1>
+          <p>GrWebDev</p>
+          <p>24 July 2017</p>
+          <p>Karl Swedberg</p>
         </div>
-        <h1>Going Offline</h1>
-        <p>GrWebDev</p>
-        <p>24 July 2017</p>
         <ul>
           <li>Offline Status</li>
           <li>Application Cache</li>
           <li>Progessive Web Apps (Service Workers)</li>
-
+          <li>Client-side, Syncing Databases</li>
         </ul>
       </section>
       <section>
@@ -164,13 +164,13 @@
         <h2>Service Worker: Background Sync</h2>
         <ul>
           <li>sync event is triggered when device goes online</li>
-          <li>don't need to keep persisent HTTP connection open</li>
-          <li>because in SW, can fire even if the website isn't open</li>
+          <li>Don't need to keep persisent HTTP connection open</li>
+          <li>Because in SW, can fire even if the website isn't open</li>
         </ul>
 
-        <h3>Resources</h3>
+        <h3>Background Sync Resources</h3>
         <ul>
-          <li><a href="https://wiki-offline.jakearchibald.com/">Demo</a></li>
+          <li>* <a href="https://wiki-offline.jakearchibald.com/">Jake Archibald's Offline Wiki Demo</a></li>
           <li><a href="https://developers.google.com/web/updates/2015/12/background-sync">Introducing Background Sync</a></li>
           <li><a href="https://ponyfoo.com/articles/backgroundsync">ServiceWorker: A Basic Guide to BackgroundSync</a></li>
           <li><a href="https://github.com/WICG/BackgroundSync/blob/master/explainer.md">WICG BackgroundSync Explainer</a></li>
@@ -186,6 +186,12 @@
 
       <section>
         <h2>Databases</h2>
+        <h3>…Versus SW background sync (ideally)</h3>
+        <ul>
+          <li>Service Worker better because sync event can be triggered without website open</li>
+          <li>ServiceWorker more efficient: no long polling / multiple http connections open</li>
+          <li>Client-side db seems to react faster to online state change</li>
+        </ul>
         <p>Example: <li><a href="https://digitalimagegallery.howardmiller.com/">Image Gallery</a></li></p>
       </section>
 
@@ -202,9 +208,11 @@
 
       <section>
         <h2>Databases: GUN</h2>
+        <p><a href="https://github.com/amark/gun">GUN on GitHub</a></p>
         <blockquote cite="http://gun.js.org/">
           GUN works even if your internet or cell reception doesn't. Users can still plug away and save data as normal, and then when the network comes back online GUN will automatically synchronize all the changes and handle any conflicts for you.
         </blockquote>
+        <div data-code="examples/gun.js"></div>
       </section>
 
       <section>
@@ -219,16 +227,17 @@
           <li>Many plugins appear abandoned</li>
         </ul>
       </section>
+
       <section>
         <h2>Further Resources</h2>
         <h3>Info</h3>
         <ul>
-          <li><a href="https://developers.google.com/web/fundamentals/architecture/app-shell">The App Shell Model</a></li>
           <li><a href="https://developers.google.com/web/fundamentals/instant-and-offline/offline-cookbook/">Offline Cookbook</a></li>
           <li>
             <a href="https://serviceworke.rs/">ServiceWorker Cookbook</a>
           </li>
           <li><a href="https://labs.kollegorna.se/blog/2017/06/service-worker-gotchas/">Service Worker gotchas</a></li>
+          <li><a href="https://developers.google.com/web/fundamentals/architecture/app-shell">The App Shell Model</a>: for single-page apps</li>
           <li>Offline-first for Your Templated Site (<a href="https://jeffy.info/2016/11/02/offline-first-for-your-templated-site-part-1.html">Part 1</a>, <a href="https://jeffy.info/2017/01/24/offline-first-for-your-templated-site-part-2.html">Part 2</a>)
           </li>
         </ul>
