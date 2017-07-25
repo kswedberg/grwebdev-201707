@@ -4,34 +4,44 @@
     <meta charset="utf-8">
     <title>GRWebDev: Offline</title>
     <link rel="stylesheet" href="css/app.css">
+    <link rel="icon" href="/favicon.ico?v=2">
   </head>
   <body>
     <div id="slideshow">
-      <section class="is-active center">
+      <section class="is-active">
+        <div class="center">
+
+        </div>
         <h1>Going Offline</h1>
         <p>GrWebDev</p>
         <p>24 July 2017</p>
+        <ul>
+          <li>Offline Status</li>
+          <li>Application Cache</li>
+          <li>Progessive Web Apps (Service Workers)</li>
+
+        </ul>
       </section>
       <section>
         <h2>Show Offline Status</h2>
         <p>Add an "alert" div:</p>
-        <div data-prism="examples/is-offline.html"></div>
+        <div data-code="examples/is-offline.html"></div>
 
         <p>And, add a function to change its state:</p>
-        <div data-prism="examples/is-offline-pre.js"></div>
+        <div data-code="examples/is-offline-pre.js"></div>
 
 
       </section>
       <section>
         <h2>Show Offline Status: Alert &amp; Forms</h2>
-        <div data-prism="examples/is-offline.js"></div>
+        <div data-code="examples/is-offline.js"></div>
         <h3>Offline Form</h3>
         <form class="" action="index.html" method="post">
           <label for="form-foo">Foo</label>
           <input type="text" name="foo" value="" id="form-foo">
           <button type="submit" name="send">Send</button>
         </form>
-        <div data-prism="examples/is-offline.css"></div>
+        <div data-code="examples/is-offline.css"></div>
       </section>
 
       <section>
@@ -42,8 +52,8 @@
         <!--
         "The CacheStorage interface represents the storage for Cache objects. It provides a master directory of all the named caches that a ServiceWorker, other type of worker or window scope can access (you don't have to use it with service workers, even though that is the spec that defines it) and maintains a mapping of string names to corresponding Cache objects."
         -->
-        <div data-prism="examples/offline-links.js"></div>
-        <div data-prism="examples/offline-links.css"></div>
+        <div data-code="examples/offline-links.js"></div>
+        <div data-code="examples/offline-links.css"></div>
       </section>
 
       <section>
@@ -56,6 +66,9 @@
             <p>Make sure you don't cache the manifest itself.</p>
             <code>ExpiresByType text/cache-manifest "access plus 0 seconds"</code></li>
         </ul>
+        <div>
+          <img src="img/caniuse-serviceworker.png" alt="http://caniuse.com/#search=serviceworker">
+        </div>
       </section>
 
       <section>
@@ -78,38 +91,39 @@
           <li>Show a custom offline page if the network is down</li>
           <li>Get resources from the network first, and fall back to a cached version if network is down</li>
           <li>Get resources from cache first, and fall back to network if cached copy unavailable or stale</li>
+          <li>Enable background sync (maybe?) and even periodic background sync (some day?)</li>
           <li>Provide push notifications</li>
-          <li>Enable background sync</li>
         </ul>
       </section>
 
       <section>
         <h2>Registering a Service Worker — Minimal</h2>
-        <div data-prism="examples/sw-register-minimal.js"></div>
+        <div data-code="examples/sw-register-minimal.js"></div>
       </section>
 
       <section>
         <h2>Registering a Service Worker — Robust</h2>
-        <div data-prism="examples/sw-fallback/sw-register.js"></div>
+        <div data-code="examples/sw-fallback/sw-register.js"></div>
       </section>
 
       <section>
         <h2>Service Worker: Offline Page Fallback</h2>
         <p>Regarding waitUntil():</p>
         <blockquote cite="https://developer.mozilla.org/en-US/docs/Web/API/ExtendableEvent/waitUntil">In service workers, extending the life of an event prevents the browser from terminating the service worker before asynchronous operations within the event have completed.</blockquote>
-        <div data-prism="examples/sw-fallback/sw-pre.js"></div>
+        <div data-code="examples/sw-fallback/sw-pre.js"></div>
       </section>
+
       <section>
         <h2>Service Worker: Offline Page Fallback</h2>
         <p><a href="examples/sw-fallback/">example</a></p>
         <p>Complete code:</p>
-        <div data-prism="examples/sw-fallback/sw.js"></div>
+        <div data-code="examples/sw-fallback/sw.js"></div>
 
       </section>
 
       <section>
         <h2>Service Worker: Cache-first</h2>
-        <div data-prism="examples/sw-cachefirst.js"></div>
+        <div data-code="examples/sw-cachefirst.js"></div>
       </section>
 
       <section>
@@ -118,24 +132,55 @@
           <li>Don't browser-cache the service-worker.js file. (Set 0s expires header in Apache/nginx config)</li>
           <li>The registering file can go anywhere — either on its own or bundled with the rest of your scripts</li>
           <li>The service worker file will only cache files in its directory or child directories of it (so, good idea to put it in doc root)</li>
+          <li>
+            Consider different cache strategies based on file type:
+            <div data-code="examples/is-get-html.js"></div>
+          </li>
         </ul>
       </section>
 
       <section>
+        <h2>Service Worker: Clean Up</h2>
+        <ul>
+          <li>Browser can delete files cached by ServiceWorker whenever it feels like it's getting too fat. </li>
+          <li>Browsers typically take all-or-nothing approach to clean up.</li>
+          <li>Probably good idea to have way to clean up caches on your own, especially if you're versioning them. Maybe something like this:</li>
+          <div data-code="examples/sw-clean.js"></div>
+        </ul>
+      </section>
+      <section>
         <h2>Service Worker: Advanced Caching</h2>
         <p>Use workbox.js:</p>
-        <div data-prism="examples/workbox-build.js"></div>
+        <div data-code="examples/workbox-build.js"></div>
       </section>
 
       <section>
-        <h2>PWAs: Advanced Caching config</h2>
+        <h2>Service Worker: workbox.js Generated Config</h2>
         <p>Workbox.js produces this sw-workbox.js file:</p>
-        <div data-prism="examples/sw-workbox.js"></div>
+        <div data-code="examples/sw-workbox.js"></div>
       </section>
 
       <section>
-        <h2>PWAs: SW Background Sync</h2>
-        <p>See <a href="https://developers.google.com/web/updates/2015/12/background-sync">Introducing Background Sync</a></p>
+        <h2>Service Worker: Background Sync</h2>
+        <ul>
+          <li>sync event is triggered when device goes online</li>
+          <li>don't need to keep persisent HTTP connection open</li>
+          <li>because in SW, can fire even if the website isn't open</li>
+        </ul>
+
+        <h3>Resources</h3>
+        <ul>
+          <li><a href="https://wiki-offline.jakearchibald.com/">Demo</a></li>
+          <li><a href="https://developers.google.com/web/updates/2015/12/background-sync">Introducing Background Sync</a></li>
+          <li><a href="https://ponyfoo.com/articles/backgroundsync">ServiceWorker: A Basic Guide to BackgroundSync</a></li>
+          <li><a href="https://github.com/WICG/BackgroundSync/blob/master/explainer.md">WICG BackgroundSync Explainer</a></li>
+        </ul>
+        <h3>My Experience</h3>
+        <ul>
+          <li>Slow: Has taken 5 minutes or more for sync to fire after going back online</li>
+          <li>Unreliable: Sometimes doesn't seem to work at all</li>
+          <li>Browser support still poor: Only Chrome currently supports it</li>
+        </ul>
 
       </section>
 
@@ -151,7 +196,8 @@
           <p>It enables applications to store data locally while offline, then synchronize it with CouchDB and compatible servers when the application is back online, keeping the user's data in sync no matter where they next login.</p>
         </blockquote>
 
-        <div data-prism="examples/pouchdb.js"></div>
+        <div data-code="examples/pouchdb.js"></div>
+
       </section>
 
       <section>
@@ -163,14 +209,21 @@
 
       <section>
         <h2>Offline-first Framework: Hoodie</h2>
+        <p><a href="http://hood.ie/">hood.ie</a></p>
         <ul>
           <li>Uses PouchDB / CouchDB</li>
-
+          <li>Super intuitive API for main features</li>
+          <li>I want to love it, but …</li>
+          <li>Documentation leaves much to be desired</li>
+          <li>Not clear where project is headed</li>
+          <li>Many plugins appear abandoned</li>
         </ul>
       </section>
       <section>
-        <h2>Resources</h2>
+        <h2>Further Resources</h2>
+        <h3>Info</h3>
         <ul>
+          <li><a href="https://developers.google.com/web/fundamentals/architecture/app-shell">The App Shell Model</a></li>
           <li><a href="https://developers.google.com/web/fundamentals/instant-and-offline/offline-cookbook/">Offline Cookbook</a></li>
           <li>
             <a href="https://serviceworke.rs/">ServiceWorker Cookbook</a>
@@ -178,17 +231,28 @@
           <li><a href="https://labs.kollegorna.se/blog/2017/06/service-worker-gotchas/">Service Worker gotchas</a></li>
           <li>Offline-first for Your Templated Site (<a href="https://jeffy.info/2016/11/02/offline-first-for-your-templated-site-part-1.html">Part 1</a>, <a href="https://jeffy.info/2017/01/24/offline-first-for-your-templated-site-part-2.html">Part 2</a>)
           </li>
+        </ul>
+        <h3>Tools</h3>
+        <ul>
           <li><a href="https://workboxjs.org/">Workbox</a>: A set of modular JavaScript libraries</li>
           <li><a href="https://developers.google.com/web/tools/lighthouse/">Lighthouse</a>: Chrome extension/CLI tool/Node module for running web page audits (including PWA checks). Also, available in Chrome Canary's Developer Tools Audit tab. </li>
-
         </ul>
-      </section>
-      <section>
-        <h2>My Examples</h2>
+        <h3>My Examples</h3>
         <ul>
           <li><a href="https://digitalimagegallery.howardmiller.com/">Image Gallery</a></li>
           <li><a href="https://experiment21.com/">Experiment 21</a></li>
           <li><a href="https://derfinkletv.fusionarydev.com/game/PWBD">DTV</a> (NOT READY FOR PRIME TIME!)</li>
+        </ul>
+
+      </section>
+      <section>
+        <h2>Thanks!</h2>
+        <ul>
+          <li>This presentation: https://grwebdev.swedberg.us</li>
+          <li>Source code: <a href="https://github.com/kswedberg/grwebdev-201707">https://github.com/kswedberg/grwebdev-201707</a></li>
+          <li>gmail: kswedberg</li>
+          <li>twitter: <a href="https://twitter.com/kswedberg">@kswedberg</a></li>
+          <li>IRL: hello!</li>
         </ul>
       </section>
     </div>

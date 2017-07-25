@@ -1,6 +1,10 @@
 import {router} from './router.js';
-import {loadStyles} from './styles.js';
 import '../examples/is-offline.js';
 import '../examples/offline-links.js';
+import {registerWorker} from './sw-register.js';
+
 router('#slideshow');
-loadStyles();
+
+window.addEventListener('load', function() {
+  registerWorker('/sw.js');
+});

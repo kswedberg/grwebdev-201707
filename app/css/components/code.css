@@ -6,8 +6,8 @@ pre {
   font-size: 1.3em;
 }
 
-[data-prism]::after {
-  content: attr(data-prism);
+[data-code]::after {
+  content: attr(data-code);
   display: block;
   margin-bottom: 1em;
   font-style: italic;

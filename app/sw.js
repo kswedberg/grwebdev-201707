@@ -1,10 +1,8 @@
-const cacheId = 'grwebdev-offline';
+const cacheId = 'grwebdev-presentation';
 const precacheFiles = [
-  'offline.html',
-  '404.html',
+  '/',
   '/css/app.css',
   '/js/app.js',
-  'sw-register.js'
 ];
 
 const precache = () => {
@@ -52,20 +50,40 @@ self.addEventListener('install', function(event) {
 });
 
 self.addEventListener('activate', (event) => {
-  // Along with self.skipWaiting() in the install listener,
-  // lets the serviceWorker start working immediately without navigation in the browser
+
+  self.clients.matchAll({
+    includeUncontrolled: true
+  })
+  .then(function(clientList) {
+    var urls = clientList.map((client) => client.url);
+
+    // console.log('[ServiceWorker] Matching clients:', urls.join(', '));
+  });
+
+
+  event.waitUntil(
+    caches.keys()
+    .then(function(cacheIds) {
+      console.log(cacheIds);
+
+      return Promise.resolve();
+    })
+  );
+
   return self.clients.claim();
 });
 
 self.addEventListener('fetch', (event) => {
+  let request = event.request;
+
   event.respondWith(
-    getFromCache(event.request)
-    .catch(getFromServer(event.request))
+    getFromCache(request)
+    .catch(getFromServer(request))
   );
 
   // Only do this for same-site resources
-  if (location.origin === event.request.url.origin) {
-    event.waitUntil(update(event.request));
+  if (location.origin === request.url.origin && !request.pathname.endsWith('favicon.ico')) {
+    event.waitUntil(update(request));
   }
 
 });

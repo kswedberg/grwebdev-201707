@@ -1,3 +1,5 @@
+// Copied/modified from pouchdb.com
+
 import PouchDB from 'pouchdb';
 
 var db = new PouchDB('grwebdev');

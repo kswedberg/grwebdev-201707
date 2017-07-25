@@ -7,7 +7,7 @@
     "clean": "rm -rf ./public/",
     "copy": "node ./scripts/copy.js",
     "build:js": "webpack --progress --colors",
-    "build:css": "postcss app/css/app.css -c scripts/postcss.config.js -o public/css/app.css && postcss app/css/secondary.css -c scripts/postcss.config.js -o public/css/secondary.css",
+    "build:css": "postcss app/css/app.css -c scripts/postcss.config.js -o public/css/app.css",
     "build": "npm run clean && npm run copy && npm run build:js && npm run build:css",
     "build:production": "NODE_ENV=production npm run build",
     "watch:js": "webpack --progress --colors --watch",

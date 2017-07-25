@@ -1,5 +1,5 @@
 let host = location.hostname;
-let httpsOnly = location.protocol === 'https:' && host.indexOf('.com') !== -1;
+let httpsOnly = location.protocol === 'https:';
 
 let registerWorker = (filePath) => {
 
@@ -11,10 +11,10 @@ let registerWorker = (filePath) => {
   }
 
   navigator.serviceWorker.register(filePath)
-  .then(function(registration) {
+  .then((registration) => {
 
     // updatefound is fired if sw.js changes.
-    registration.onupdatefound = function() {
+    registration.onupdatefound = () => {
       // The updatefound event implies that registration.installing is set
       var installingWorker = registration.installing;
 
@@ -49,8 +49,8 @@ let registerWorker = (filePath) => {
     }
 
   })
-  .catch(function(e) {
-    console.error('[Register]', 'Error during service worker registration:', e);
+  .catch((event) => {
+    console.error('[Register]', 'Error during service worker registration:', event);
   });
 };
 

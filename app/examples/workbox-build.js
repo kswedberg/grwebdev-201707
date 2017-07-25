@@ -34,7 +34,4 @@ wbBuild.generateSW({
 .then(() => {
   console.log('Built serviceWorker');
 })
-.catch((err) => {
-  console.log('oh no!');
-  console.log(err);
-});
+.catch(console.error);

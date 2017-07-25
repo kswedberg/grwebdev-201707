@@ -8,16 +8,18 @@ const toCopy = [
   '.htaccess',
   'favicon.ico',
   'manifest.json',
-  'examples'
+  'sw.js',
+  'examples',
+  'img',
 ];
 
 const langs = {
   js: 'javascript',
 };
 
-const injectScripts = ($) => {
+const injectScripts = ($, dataAttr) => {
   return function() {
-    let filePath = $(this).attr('data-prism');
+    let filePath = $(this).attr(dataAttr);
     let file = path.join(cwd, 'app', filePath);
     let ext = path.extname(file).replace(/^\./, '');
     let lang = $(this).attr('data-lang') || langs[ext] || ext;
@@ -38,6 +40,7 @@ const buildIndex = () => {
   .then((raw) => {
     let $ = cheerio.load(raw);
     let links = [];
+    let dataAttr = 'data-code';
 
     $('section').each(function(index) {
       let id = `s-${index}`;
@@ -55,7 +58,7 @@ const buildIndex = () => {
 
     $('#alert').after(`<footer>${links.join('')}</footer>`);
 
-    $('[data-prism]').each(injectScripts($));
+    $(`[${dataAttr}]`).each(injectScripts($, dataAttr));
 
     let content = $.html();
 

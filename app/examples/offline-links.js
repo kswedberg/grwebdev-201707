@@ -12,7 +12,6 @@ const links = document.querySelectorAll('a[href]');
   .match(link.href, {ignoreSearch: true})
   .then((response) => {
     if (response) {
-      console.log(`Cached link: ${response.url}`);
       link.classList.add('is-cached');
     }
   });
