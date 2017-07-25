@@ -8,7 +8,6 @@ const toCopy = [
   '.htaccess',
   'favicon.ico',
   'manifest.json',
-  'sw.js',
   'examples',
   'img',
 ];

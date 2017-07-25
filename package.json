@@ -6,9 +6,10 @@
   "scripts": {
     "clean": "rm -rf ./public/",
     "copy": "node ./scripts/copy.js",
+    "sw": "node ./scripts/sw.js",
     "build:js": "webpack --progress --colors",
     "build:css": "postcss app/css/app.css -c scripts/postcss.config.js -o public/css/app.css",
-    "build": "npm run clean && npm run copy && npm run build:js && npm run build:css",
+    "build": "npm run clean && npm run copy && npm run build:js && npm run build:css && npm run sw",
     "build:production": "NODE_ENV=production npm run build",
     "watch:js": "webpack --progress --colors --watch",
     "watch:css": "postcss app/css/app.css -c scripts/postcss.config.js -o public/css/app.css --watch",
