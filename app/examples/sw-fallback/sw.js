@@ -73,7 +73,12 @@ self.addEventListener('fetch', (event) => {
   event.respondWith(
     getFromServer(event.request)
     .catch(() => {
-      return getFromCache(event.request);
+      return getFromCache(event.request)
+      .catch((err) => {
+        console.error('Getting from cache failed:', err);
+
+        throw err;
+      });
     })
   );
 

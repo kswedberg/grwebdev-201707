@@ -8,7 +8,8 @@ wbBuild.generateSW({
   swDest: path.join(dest, 'sw.js'),
   globDirectory: `${dest}/`,
   globPatterns: [
-    '/',
+
+    'index.html',
     'css/*.css',
     'js/*.js',
   ],

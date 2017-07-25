@@ -8,6 +8,7 @@ body {
   overflow: hidden;
   font-family: var(--system-font);
   line-height: 1.4;
+  font-size: 1.14em;
 }
 *,
 *::before,
