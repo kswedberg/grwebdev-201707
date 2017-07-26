@@ -4,7 +4,7 @@ const dest = path.join(process.cwd(), 'public');
 const wbBuild = require('workbox-build');
 
 wbBuild.generateSW({
-  cacheId: 'grwebdev-offline',
+  cacheId: 'grjs-offline',
   swDest: path.join(dest, 'sw-workbox.js'),
   globDirectory: `${dest}/`,
   globPatterns: [

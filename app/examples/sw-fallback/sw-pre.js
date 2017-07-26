@@ -1,4 +1,4 @@
-const cacheId = 'grwebdev-offline';
+const cacheId = 'grjs-offline';
 const precacheFiles = [
   // Fallback pages:
   'offline.html',

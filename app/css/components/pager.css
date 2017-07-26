@@ -1,0 +1,61 @@
+.Pager {
+  position: fixed;
+  bottom: 0;
+  z-index: 10;
+  width: 100%;
+  color: var(--pager-text);
+
+  & a {
+    display: inline-block;
+    color: var(--pager-link);
+    margin-top: 8px;
+    padding: 3px 6px;
+    text-decoration: none;
+
+    &.is-active {
+      background-color: var(--pager-active-background);
+      color: var(--pager-active-text);
+    }
+  }
+}
+
+.Pager-content {
+  z-index: 10;
+  padding: 10px 40px;
+  transform: scale(1);
+  transition: all .4s;
+  background-color: var(--pager-background);
+}
+
+.Pager-toggle {
+  z-index: 15;
+  position: absolute;
+  right: 16px;
+  bottom: 16px;
+  background-color: #fff;
+  box-shadow: 3px 3px 6px rgba(0, 0, 0, 0.3);
+  border-radius: 50%;
+  border: 1px solid #333;
+  padding: 0;
+  text-align: center;
+  & span {
+    display: block;
+    transform: rotateZ(45deg);
+    transition: transform .4s;
+    height: 16px;
+    width: 16px;
+    line-height: 16px;
+  }
+}
+
+.Pager.is-hidden {
+  & .Pager-content {
+    transform: scale(.1);
+    opacity: 0;
+    z-index: -2;
+  }
+
+  & .Pager-toggle span {
+    transform: rotateZ(0deg);
+  }
+}

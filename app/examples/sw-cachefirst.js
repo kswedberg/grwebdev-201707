@@ -1,4 +1,4 @@
-const cacheId = 'grwebdev-offline';
+const cacheId = 'grjs-offline';
 const precacheFiles = [
   'offline.html',
   '404.html',

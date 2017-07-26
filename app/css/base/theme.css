@@ -1,3 +1,16 @@
 :root {
-  --system-font: BlinkMacSystemFont, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  --font-family: BlinkMacSystemFont, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  --slide-text: #333;
+  --slide-background: #e4f3ff;
+  --link-color: #952a2a;
+
+  --header-text: #fff;
+  --header-background: #338;
+  --header-border: 1px solid #fff;
+
+  --pager-text: #ddd;
+  --pager-background: rgba(51, 51, 136, 0.88);
+  --pager-link: #fff;
+  --pager-active-text: #338;
+  --pager-active-background: #fff;
 }

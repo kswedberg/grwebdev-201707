@@ -24,7 +24,7 @@ const fileManifest = [
 ];
 
 const workboxSW = new self.WorkboxSW({
-  cacheId: 'grwebdev-offline',
+  cacheId: 'grjs-offline',
   clientsClaim: true
 });
 

@@ -31,6 +31,36 @@ const injectScripts = ($, dataAttr) => {
   };
 };
 
+const setupSections = ($) => {
+  return function(index) {
+    let id = `s-${index}`;
+
+    $(this)
+    .attr('id', id)
+    .attr('tab-index', `${index}`);
+  };
+};
+
+const buildPager = ($) => {
+  let links = [];
+
+  $('section').each(function(index) {
+    let id = `s-${index}`;
+    let title = $(this)
+    .find('h2')
+    .first()
+    .text();
+
+    links.push(`<a title="${title}" href="#${id}">${index || 'start'}</a>`);
+
+    $(this)
+    .attr('id', id)
+    .attr('tab-index', `${index}`);
+  });
+
+  $('#alert').after(`<footer class="Pager js-Pager"><div class="Pager-content">${links.join('')}</div></footer>`);
+};
+
 const buildIndex = () => {
   let from = path.join(cwd, 'app', 'index.html');
   let to = path.join(cwd, 'public', 'index.html');
@@ -38,26 +68,13 @@ const buildIndex = () => {
   return fs.readFile(from, 'utf-8')
   .then((raw) => {
     let $ = cheerio.load(raw);
-    let links = [];
     let dataAttr = 'data-code';
 
-    $('section').each(function(index) {
-      let id = `s-${index}`;
-      let title = $(this)
-      .find('h2')
-      .first()
-      .text();
-
-      links.push(`<a title="${title}" href="#${id}">${index || 'start'}</a>`);
-
-      $(this)
-      .attr('id', id)
-      .attr('tab-index', `${index}`);
-    });
-
-    $('#alert').after(`<footer>${links.join('')}</footer>`);
+    $('section').each(setupSections($));
 
     $(`[${dataAttr}]`).each(injectScripts($, dataAttr));
+
+    buildPager($);
 
     let content = $.html();
 

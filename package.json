@@ -1,6 +1,6 @@
 {
-  "name": "grwebdev",
   "version": "1.0.1",
+  "name": "grjs-offline",
   "description": "",
   "main": "index.js",
   "scripts": {

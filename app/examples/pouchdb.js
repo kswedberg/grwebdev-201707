@@ -2,7 +2,7 @@
 
 import PouchDB from 'pouchdb';
 
-var db = new PouchDB('grwebdev');
+var db = new PouchDB('grjs');
 
 db.changes().on('change', function() {
   console.log('Ch-Ch-Changes');

@@ -1,4 +1,4 @@
-# Presentation for GRWebDev Meetup, 25 July 2017 Edit
+# Presentation for Grand Rapids JavaScript Meetup, 25 July 2017 Edit
 
 To run this locally, you must first have node.js 4+ and (optionally) yarn installed. Then:
 
