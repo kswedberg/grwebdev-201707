@@ -40,11 +40,11 @@ export let router = function(selector) {
   let onHashChange = () => {
     removeActiveClass();
 
-    let links = document.querySelectorAll('footer a');
+    let links = document.querySelectorAll('.js-Pager a');
 
     [...links].forEach((link) => link.classList.toggle('is-active', link.hash === location.hash));
 
-    let activeLink = document.querySelector('footer a.is-active');
+    let activeLink = document.querySelector('.js-Pager a.is-active');
 
     if (activeLink) {
       document.title = `${docTitle} ${activeLink.title}`;
