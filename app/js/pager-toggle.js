@@ -19,7 +19,7 @@ export let pagerToggle = () => {
   let pager = document.querySelector('.js-Pager');
 
   if (!pager) {
-    console.log('no pager');
+    return;
   }
 
   let btn = buildEl('button', {className: 'Pager-toggle'});
