@@ -82,10 +82,28 @@ const buildIndex = () => {
   });
 };
 
-Promises.each(toCopy, (file) => {
-  let from = path.join(cwd, 'app', file);
-  let to = path.join(cwd, 'public', file);
+let buildAll = function() {
+  return Promises.each(toCopy, (file) => {
+    let from = path.join(cwd, 'app', file);
+    let to = path.join(cwd, 'public', file);
 
-  return fs.copy(from, to);
-})
-.then(buildIndex);
+    return fs.copy(from, to);
+  })
+  .then(buildIndex);
+};
+
+if (process.argv.includes('cli')) {
+  buildAll();
+}
+
+module.exports = {
+  files: toCopy,
+  buildAll,
+  buildIndex,
+  copyFile: function(file) {
+    let from = path.join(cwd, 'app', file);
+    let to = path.join(cwd, 'public', file);
+
+    return fs.copy(from, to);
+  }
+};
