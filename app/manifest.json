@@ -1,1 +1,7 @@
-{}
+{
+  "name": "GRJS Presentation 2017-07",
+  "short_name": "GRJS 201707",
+  "lang": "en-US",
+  "start_url": "/",
+  "display": "standalone"
+}
