@@ -3,5 +3,6 @@
   "short_name": "GRJS 201707",
   "lang": "en-US",
   "start_url": "/",
-  "display": "standalone"
+  "display": "standalone",
+  "theme_color": "e4f3ff"
 }
