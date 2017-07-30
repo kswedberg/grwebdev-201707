@@ -4,7 +4,6 @@
   z-index: 10;
   width: 100%;
   color: var(--pager-text);
-
   & a {
     display: inline-block;
     color: var(--pager-link);
@@ -25,6 +24,13 @@
   transform: scale(1);
   transition: all .4s;
   background-color: var(--pager-background);
+
+  @nest .Pager.is-hidden & span {
+    transform: scale(.1);
+    opacity: 0;
+    z-index: -2;
+    background-color: whitesmoke;
+  }
 }
 
 .Pager-toggle {
@@ -38,6 +44,7 @@
   border: 1px solid #333;
   padding: 0;
   text-align: center;
+
   & span {
     display: block;
     transform: rotateZ(45deg);
@@ -46,16 +53,9 @@
     width: 16px;
     line-height: 16px;
   }
-}
 
-.Pager.is-hidden {
-  & .Pager-content {
-    transform: scale(.1);
-    opacity: 0;
-    z-index: -2;
-  }
-
-  & .Pager-toggle span {
+  @nest .Pager.ishidden & span {
     transform: rotateZ(0deg);
+    background-color: whitesmoke;
   }
 }
