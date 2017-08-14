@@ -37,7 +37,7 @@ const setupSections = ($) => {
 
     $(this)
     .attr('id', id)
-    .attr('tabindex', `${index}`);
+    .attr('tabindex', '0');
   };
 };
 
@@ -55,7 +55,7 @@ const buildPager = ($) => {
 
     $(this)
     .attr('id', id)
-    .attr('tabindex', `${index}`);
+    .attr('tabindex', '0');
   });
 
   $('#alert').after(`<footer class="Pager js-Pager"><div class="Pager-content">${links.join('')}</div></footer>`);
