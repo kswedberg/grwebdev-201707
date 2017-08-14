@@ -7,7 +7,7 @@ const Prism = require('prismjs');
 const toCopy = [
   '.htaccess',
   'favicon.ico',
-  'manifest.json',
+  'manifest.webmanifest',
   'examples',
   'img',
 ];
