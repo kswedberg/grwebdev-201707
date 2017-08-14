@@ -11,3 +11,6 @@
   transform: scale(0);
   transition: .5s all;
 }
+.strike {
+  text-decoration: line-through;
+}
